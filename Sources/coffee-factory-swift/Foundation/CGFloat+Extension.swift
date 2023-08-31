@@ -11,6 +11,9 @@ public extension CGFloat {
     static var spacing100 = 4.0
     static var spacing200 = 8.0
     static var spacing300 = 12.0
+    static var spacing600: CGFloat {
+        48.0
+    }
 }
 
 public protocol SpacingSize {
