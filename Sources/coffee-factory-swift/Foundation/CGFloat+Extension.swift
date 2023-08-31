@@ -12,3 +12,24 @@ public extension CGFloat {
     static var spacing200 = 8.0
     static var spacing300 = 12.0
 }
+
+public protocol SpacingSize {
+    static var spacing100: CGFloat { get }
+    static var spacing400: CGFloat { get }
+    static var spacing500: CGFloat { get }
+}
+
+public extension SpacingSize {
+    static var spacing100: CGFloat {
+        return 4.0
+    }
+    static var spacing500: CGFloat {
+        return 24.0
+    }
+}
+
+extension CGFloat: SpacingSize {
+    public static var spacing400: CGFloat {
+        16.0
+    }
+}
