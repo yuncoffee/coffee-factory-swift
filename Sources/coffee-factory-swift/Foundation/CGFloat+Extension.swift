@@ -11,15 +11,14 @@ public protocol SpacingSize {
     static var spacing100: CGFloat { get }
     static var spacing800: CGFloat { get }
 }
-//
-//extension SpacingSize {
-//    static var spacing100: CGFloat {
-//        40.0
-//    }
-//}
 
 public extension SpacingSize {
     static var spacing100: CGFloat{
             20.0
     }
+    static var spacing800: CGFloat{
+            60.0
+    }
 }
+
+extension CGFloat: SpacingSize {}
