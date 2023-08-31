@@ -27,9 +27,3 @@ public extension SpacingSize {
         return 24.0
     }
 }
-
-extension CGFloat: SpacingSize {
-    public static var spacing400: CGFloat {
-        16.0
-    }
-}
