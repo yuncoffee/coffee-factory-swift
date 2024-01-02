@@ -10,23 +10,23 @@ public struct CoffeeFactorySwift {
     }
 }
 
-public enum Pretendard: String, CaseIterable {
-    case extraLight = "Pretendard-ExtraLight"
-    case thin = "Pretendard-Thin"
-    case light = "Pretendard-Light"
-    case regular = "Pretendard-Regular"
-    case medium = "Pretendard-Medium"
-    case semiBold = "Pretendard-SemiBold"
-    case bold = "Pretendard-Bold"
-    case extraBold = "Pretendard-ExtraBold"
-    case black = "Pretendard-Black"
-}
-
-extension Font {
-    public static func pretendard(_ pretendard: Pretendard, size: CGFloat, relativeTo: Font.TextStyle = .body) -> Font {
-        .custom(pretendard.rawValue, size: size, relativeTo: relativeTo)
-    }
-}
+//public enum Pretendard: String, CaseIterable {
+//    case extraLight = "Pretendard-ExtraLight"
+//    case thin = "Pretendard-Thin"
+//    case light = "Pretendard-Light"
+//    case regular = "Pretendard-Regular"
+//    case medium = "Pretendard-Medium"
+//    case semiBold = "Pretendard-SemiBold"
+//    case bold = "Pretendard-Bold"
+//    case extraBold = "Pretendard-ExtraBold"
+//    case black = "Pretendard-Black"
+//}
+//
+//extension Font {
+//    public static func pretendard(_ pretendard: Pretendard, size: CGFloat, relativeTo: Font.TextStyle = .body) -> Font {
+//        .custom(pretendard.rawValue, size: size, relativeTo: relativeTo)
+//    }
+//}
 
 public struct CoffeeFactoryFont {
     public static func registerFonts() {
