@@ -10,6 +10,12 @@ public struct CoffeeFactorySwift {
     }
 }
 
+public extension Color {
+    static var testColor: Color {
+        Color("MybaseColor")
+    }
+}
+
 //public enum Pretendard: String, CaseIterable {
 //    case extraLight = "Pretendard-ExtraLight"
 //    case thin = "Pretendard-Thin"
