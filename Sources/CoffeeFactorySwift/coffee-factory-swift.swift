@@ -11,9 +11,7 @@ public struct CoffeeFactorySwift {
 }
 
 public extension Color {
-    static var testColor: Color {
-        Color("MybaseColor")
-    }
+    static let customColor: Color = Color("MybaseColor", bundle: Bundle.module)
 }
 
 //public enum Pretendard: String, CaseIterable {
