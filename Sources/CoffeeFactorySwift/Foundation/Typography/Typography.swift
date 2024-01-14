@@ -2,7 +2,7 @@
 //	Typography.swift
 //	Coffee Factory
 //
-//	Created by YunCoffee on 2024. 1. 10.
+//	Created by YunCoffee on 2024. 1. 14.
 //
 
 import Foundation
@@ -76,147 +76,147 @@ extension CGFloat {
 }
 
 public enum Pretendard: String, CaseIterable {
-    case regular = "Pretendard-Regular"
-    case black = "Pretendard-Black"
     case bold = "Pretendard-Bold"
+    case regular = "Pretendard-Regular"
     case semiBold = "Pretendard-SemiBold"
-    case medium = "Pretendard-Medium"
     case light = "Pretendard-Light"
+    case medium = "Pretendard-Medium"
+    case black = "Pretendard-Black"
 
 
     public enum FontScale: String, CFFontDescriptor {
-	case caption2 = "Caption2"
-	case title3 = "Title3"
-	case subTitle = "SubTitle"
-	case largeTitle = "LargeTitle"
-	case title2 = "Title2"
-	case body = "Body"
-	case title = "Title"
-	case headline = "Headline"
-	case caption = "Caption"
 	case display = "Display"
+	case largeTitle = "LargeTitle"
+	case subTitle = "SubTitle"
+	case body = "Body"
+	case headline = "Headline"
+	case caption2 = "Caption2"
+	case caption = "Caption"
+	case title3 = "Title3"
+	case title2 = "Title2"
+	case title = "Title"
     
         var fontWeight: Pretendard {
             switch self {
-	    case .caption2:
-		.medium
-	    case .title3:
-		.medium
-	    case .subTitle:
-		.semiBold
+	    case .display:
+		.bold
 	    case .largeTitle:
 		.bold
-	    case .title2:
+	    case .subTitle:
 		.semiBold
 	    case .body:
 		.regular
-	    case .title:
-		.bold
 	    case .headline:
+		.medium
+	    case .caption2:
 		.medium
 	    case .caption:
 		.medium
-	    case .display:
+	    case .title3:
+		.medium
+	    case .title2:
+		.semiBold
+	    case .title:
 		.bold
             }
         }
     
         var fontSize: CGFloat {
             switch self {
-	    case .caption2:
-		10.0
-	    case .title3:
-		20.0
-	    case .subTitle:
-		18.0
-	    case .largeTitle:
-		32.0
-	    case .title2:
-		22.0
-	    case .body:
-		14.0
-	    case .title:
-		24.0
-	    case .headline:
-		16.0
-	    case .caption:
-		12.0
 	    case .display:
 		36.0
+	    case .largeTitle:
+		32.0
+	    case .subTitle:
+		18.0
+	    case .body:
+		14.0
+	    case .headline:
+		16.0
+	    case .caption2:
+		10.0
+	    case .caption:
+		12.0
+	    case .title3:
+		20.0
+	    case .title2:
+		22.0
+	    case .title:
+		24.0
             }
         }
     
         var lineHeight: CGFloat {
             switch self {
-	    case .caption2:
-		15.0
-	    case .title3:
-		30.0
-	    case .subTitle:
-		27.0
-	    case .largeTitle:
-		48.0
-	    case .title2:
-		33.0
-	    case .body:
-		21.0
-	    case .title:
-		36.0
-	    case .headline:
-		24.0
-	    case .caption:
-		18.0
 	    case .display:
 		54.0
+	    case .largeTitle:
+		48.0
+	    case .subTitle:
+		27.0
+	    case .body:
+		21.0
+	    case .headline:
+		24.0
+	    case .caption2:
+		15.0
+	    case .caption:
+		18.0
+	    case .title3:
+		30.0
+	    case .title2:
+		33.0
+	    case .title:
+		36.0
             }
         }
     
         var letterSpacing: CGFloat {
             switch self {
-	    case .caption2:
-		0.0
-	    case .title3:
-		0.0
-	    case .subTitle:
+	    case .display:
 		0.0
 	    case .largeTitle:
 		0.0
-	    case .title2:
+	    case .subTitle:
 		0.0
 	    case .body:
 		0.0
-	    case .title:
-		0.0
 	    case .headline:
+		0.0
+	    case .caption2:
 		0.0
 	    case .caption:
 		0.0
-	    case .display:
+	    case .title3:
+		0.0
+	    case .title2:
+		0.0
+	    case .title:
 		0.0
             }
         }
     
         var relativeTo: Font.TextStyle {
             switch self {
-	    case .caption2:
-		.body
-	    case .title3:
-		.body
-	    case .subTitle:
+	    case .display:
 		.body
 	    case .largeTitle:
 		.body
-	    case .title2:
+	    case .subTitle:
 		.body
 	    case .body:
 		.body
-	    case .title:
-		.body
 	    case .headline:
+		.body
+	    case .caption2:
 		.body
 	    case .caption:
 		.body
-	    case .display:
+	    case .title3:
+		.body
+	    case .title2:
+		.body
+	    case .title:
 		.body
             }
         }
