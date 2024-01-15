@@ -10,10 +10,17 @@
 import Foundation
 import SwiftUI
 
-count: 20
-
 public extension Color {
     // 구조체(폴더 기반) 생성
     // 구조체의 멤버 변수로 색상 넣기
     // 색상 raw이름을 이름으로 가져가야할듯
+}
+
+struct MyView: View {
+    
+    var body: some View {
+        Text("Heee")
+            .padding(.horizontal)
+            .foregroundStyle(Color.cf(.primaryScale(.base)))
+    }
 }
