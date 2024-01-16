@@ -2,7 +2,7 @@
 //	Typography.swift
 //	Coffee Factory
 //
-//	Created by YunCoffee on 2024. 1. 14.
+//	Created by YunCoffee on 2024. 1. 16.
 //
 
 import Foundation
@@ -76,147 +76,147 @@ extension CGFloat {
 }
 
 public enum Pretendard: String, CaseIterable {
-    case black = "Pretendard-Black"
-    case light = "Pretendard-Light"
+    case semiBold = "Pretendard-SemiBold"
     case regular = "Pretendard-Regular"
     case bold = "Pretendard-Bold"
-    case semiBold = "Pretendard-SemiBold"
     case medium = "Pretendard-Medium"
+    case black = "Pretendard-Black"
+    case light = "Pretendard-Light"
 
 
     public enum FontScale: String, CFFontDescriptor {
-	case display = "Display"
-	case title = "Title"
-	case subTitle = "SubTitle"
-	case body = "Body"
-	case caption2 = "Caption2"
-	case largeTitle = "LargeTitle"
 	case title2 = "Title2"
 	case title3 = "Title3"
-	case headline = "Headline"
+	case subTitle = "SubTitle"
+	case display = "Display"
+	case title = "Title"
 	case caption = "Caption"
+	case largeTitle = "LargeTitle"
+	case headline = "Headline"
+	case body = "Body"
+	case caption2 = "Caption2"
     
         var fontWeight: Pretendard {
             switch self {
-	    case .display:
-		.bold
-	    case .title:
-		.bold
-	    case .subTitle:
-		.semiBold
-	    case .body:
-		.regular
-	    case .caption2:
-		.medium
-	    case .largeTitle:
-		.bold
 	    case .title2:
 		.semiBold
 	    case .title3:
 		.medium
+	    case .subTitle:
+		.semiBold
+	    case .display:
+		.bold
+	    case .title:
+		.bold
+	    case .caption:
+		.medium
+	    case .largeTitle:
+		.bold
 	    case .headline:
 		.medium
-	    case .caption:
+	    case .body:
+		.regular
+	    case .caption2:
 		.medium
             }
         }
     
         var fontSize: CGFloat {
             switch self {
-	    case .display:
-		36.0
-	    case .title:
-		24.0
-	    case .subTitle:
-		18.0
-	    case .body:
-		14.0
-	    case .caption2:
-		10.0
-	    case .largeTitle:
-		32.0
 	    case .title2:
 		22.0
 	    case .title3:
 		20.0
-	    case .headline:
-		16.0
+	    case .subTitle:
+		18.0
+	    case .display:
+		36.0
+	    case .title:
+		24.0
 	    case .caption:
 		12.0
+	    case .largeTitle:
+		32.0
+	    case .headline:
+		16.0
+	    case .body:
+		14.0
+	    case .caption2:
+		10.0
             }
         }
     
         var lineHeight: CGFloat {
             switch self {
-	    case .display:
-		54.0
-	    case .title:
-		36.0
-	    case .subTitle:
-		27.0
-	    case .body:
-		21.0
-	    case .caption2:
-		15.0
-	    case .largeTitle:
-		48.0
 	    case .title2:
 		33.0
 	    case .title3:
 		30.0
-	    case .headline:
-		24.0
+	    case .subTitle:
+		27.0
+	    case .display:
+		54.0
+	    case .title:
+		36.0
 	    case .caption:
 		18.0
+	    case .largeTitle:
+		48.0
+	    case .headline:
+		24.0
+	    case .body:
+		21.0
+	    case .caption2:
+		15.0
             }
         }
     
         var letterSpacing: CGFloat {
             switch self {
-	    case .display:
-		0.0
-	    case .title:
-		0.0
-	    case .subTitle:
-		0.0
-	    case .body:
-		0.0
-	    case .caption2:
-		0.0
-	    case .largeTitle:
-		0.0
 	    case .title2:
 		0.0
 	    case .title3:
 		0.0
-	    case .headline:
+	    case .subTitle:
+		0.0
+	    case .display:
+		0.0
+	    case .title:
 		0.0
 	    case .caption:
+		0.0
+	    case .largeTitle:
+		0.0
+	    case .headline:
+		0.0
+	    case .body:
+		0.0
+	    case .caption2:
 		0.0
             }
         }
     
         var relativeTo: Font.TextStyle {
             switch self {
-	    case .display:
-		.body
-	    case .title:
-		.body
-	    case .subTitle:
-		.body
-	    case .body:
-		.body
-	    case .caption2:
-		.body
-	    case .largeTitle:
-		.body
 	    case .title2:
 		.body
 	    case .title3:
 		.body
-	    case .headline:
+	    case .subTitle:
+		.body
+	    case .display:
+		.body
+	    case .title:
 		.body
 	    case .caption:
+		.body
+	    case .largeTitle:
+		.body
+	    case .headline:
+		.body
+	    case .body:
+		.body
+	    case .caption2:
 		.body
             }
         }
