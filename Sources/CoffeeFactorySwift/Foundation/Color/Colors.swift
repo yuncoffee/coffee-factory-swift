@@ -29,15 +29,15 @@ public enum CFColor {
     var color: Color {
         switch self {
 		case .colorScale(let cfColor):
-			Color(cfColor.rawValue, bundle: Bundle.module)
+			Color(cfColor.rawValue)
 		case .utils(let cfColor):
-			Color(cfColor.rawValue, bundle: Bundle.module)
+			Color(cfColor.rawValue)
 		case .grayScale(let cfColor):
-			Color(cfColor.rawValue, bundle: Bundle.module)
+			Color(cfColor.rawValue)
 		case .shadow(let cfColor):
-			Color(cfColor.rawValue, bundle: Bundle.module)
+			Color(cfColor.rawValue)
 		case .primaryScale(let cfColor):
-			Color(cfColor.rawValue, bundle: Bundle.module)
+			Color(cfColor.rawValue)
 
         }
     }
