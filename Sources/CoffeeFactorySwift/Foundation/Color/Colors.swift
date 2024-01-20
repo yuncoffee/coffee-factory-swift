@@ -20,19 +20,19 @@ public extension Color {
 }
 
 public enum CFColor {
-	case colorScale(CFColorScale)
 	case utils(CFUtils)
 	case primaryScale(CFPrimaryScale)
+	case colorScale(CFColorScale)
 	case grayScale(CFGrayScale)
 	case shadow(CFShadow)
 
-    var color: Color {
+    public var color: Color {
         switch self {
-		case .colorScale(let cfColor):
-			Color(cfColor.rawValue, bundle: Bundle.module)
 		case .utils(let cfColor):
 			Color(cfColor.rawValue, bundle: Bundle.module)
 		case .primaryScale(let cfColor):
+			Color(cfColor.rawValue, bundle: Bundle.module)
+		case .colorScale(let cfColor):
 			Color(cfColor.rawValue, bundle: Bundle.module)
 		case .grayScale(let cfColor):
 			Color(cfColor.rawValue, bundle: Bundle.module)
@@ -41,57 +41,6 @@ public enum CFColor {
 
         }
     }
-}
-
-public enum CFColorScale {
-	case scalet(CFColorScaleScalet)
-	case yellow(CFColorScaleYellow)
-	case orange(CFColorScaleOrange)
-	case lavendar(CFColorScaleLavendar)
-	case lightGreen(CFColorScaleLightGreen)
-	case red(CFColorScaleRed)
-	case teal(CFColorScaleTeal)
-	case purple(CFColorScalePurple)
-	case pink(CFColorScalePink)
-	case green(CFColorScaleGreen)
-	case blue(CFColorScaleBlue)
-	case deepBlue(CFColorScaleDeepBlue)
-	case navy(CFColorScaleNavy)
-	case violet(CFColorScaleViolet)
-
-	var rawValue: String {
-    switch self {
-	case .scalet(let cfColor):
-		cfColor.rawValue
-	case .yellow(let cfColor):
-		cfColor.rawValue
-	case .orange(let cfColor):
-		cfColor.rawValue
-	case .lavendar(let cfColor):
-		cfColor.rawValue
-	case .lightGreen(let cfColor):
-		cfColor.rawValue
-	case .red(let cfColor):
-		cfColor.rawValue
-	case .teal(let cfColor):
-		cfColor.rawValue
-	case .purple(let cfColor):
-		cfColor.rawValue
-	case .pink(let cfColor):
-		cfColor.rawValue
-	case .green(let cfColor):
-		cfColor.rawValue
-	case .blue(let cfColor):
-		cfColor.rawValue
-	case .deepBlue(let cfColor):
-		cfColor.rawValue
-	case .navy(let cfColor):
-		cfColor.rawValue
-	case .violet(let cfColor):
-		cfColor.rawValue
-    	}
-	}
-
 }
 
 public enum CFPrimaryScale {
@@ -112,32 +61,132 @@ public enum CFPrimaryScale {
 
 }
 
+public enum CFColorScale {
+	case purple(CFColorScalePurple)
+	case navy(CFColorScaleNavy)
+	case lightGreen(CFColorScaleLightGreen)
+	case pink(CFColorScalePink)
+	case deepBlue(CFColorScaleDeepBlue)
+	case green(CFColorScaleGreen)
+	case red(CFColorScaleRed)
+	case orange(CFColorScaleOrange)
+	case yellow(CFColorScaleYellow)
+	case violet(CFColorScaleViolet)
+	case teal(CFColorScaleTeal)
+	case lavendar(CFColorScaleLavendar)
+	case scalet(CFColorScaleScalet)
+	case blue(CFColorScaleBlue)
 
-public enum CFShadow: String {
-	case none = "shadowNone"
-	case base = "shadowBase"
+	var rawValue: String {
+    switch self {
+	case .purple(let cfColor):
+		cfColor.rawValue
+	case .navy(let cfColor):
+		cfColor.rawValue
+	case .lightGreen(let cfColor):
+		cfColor.rawValue
+	case .pink(let cfColor):
+		cfColor.rawValue
+	case .deepBlue(let cfColor):
+		cfColor.rawValue
+	case .green(let cfColor):
+		cfColor.rawValue
+	case .red(let cfColor):
+		cfColor.rawValue
+	case .orange(let cfColor):
+		cfColor.rawValue
+	case .yellow(let cfColor):
+		cfColor.rawValue
+	case .violet(let cfColor):
+		cfColor.rawValue
+	case .teal(let cfColor):
+		cfColor.rawValue
+	case .lavendar(let cfColor):
+		cfColor.rawValue
+	case .scalet(let cfColor):
+		cfColor.rawValue
+	case .blue(let cfColor):
+		cfColor.rawValue
+    	}
+	}
 
 }
 
-public enum CFColorScaleScalet: String {
-	case lightness = "colorScaleScaletLightness"
-	case lighter = "colorScaleScaletLighter"
-	case light = "colorScaleScaletLight"
-	case base = "colorScaleScaletBase"
-	case dark = "colorScaleScaletDark"
-	case darker = "colorScaleScaletDarker"
-	case darkness = "colorScaleScaletDarkness"
+
+public enum CFColorScalePurple: String {
+	case lightness = "colorScalePurpleLightness"
+	case lighter = "colorScalePurpleLighter"
+	case light = "colorScalePurpleLight"
+	case base = "colorScalePurpleBase"
+	case dark = "colorScalePurpleDark"
+	case darker = "colorScalePurpleDarker"
+	case darkness = "colorScalePurpleDarkness"
 
 }
 
-public enum CFColorScaleYellow: String {
-	case lightness = "colorScaleYellowLightness"
-	case lighter = "colorScaleYellowLighter"
-	case light = "colorScaleYellowLight"
-	case base = "colorScaleYellowBase"
-	case dark = "colorScaleYellowDark"
-	case darker = "colorScaleYellowDarker"
-	case darkness = "colorScaleYellowDarkness"
+public enum CFColorScaleNavy: String {
+	case lightness = "colorScaleNavyLightness"
+	case lighter = "colorScaleNavyLighter"
+	case light = "colorScaleNavyLight"
+	case base = "colorScaleNavyBase"
+	case dark = "colorScaleNavyDark"
+	case darker = "colorScaleNavyDarker"
+	case darkness = "colorScaleNavyDarkness"
+
+}
+
+public enum CFColorScaleLightGreen: String {
+	case lightness = "colorScaleLightGreenLightness"
+	case lighter = "colorScaleLightGreenLighter"
+	case light = "colorScaleLightGreenLight"
+	case base = "colorScaleLightGreenBase"
+	case dark = "colorScaleLightGreenDark"
+	case darker = "colorScaleLightGreenDarker"
+	case darkness = "colorScaleLightGreenDarkness"
+
+}
+
+public enum CFColorScalePink: String {
+	case lightness = "colorScalePinkLightness"
+	case lighter = "colorScalePinkLighter"
+	case light = "colorScalePinkLight"
+	case base = "colorScalePinkBase"
+	case dark = "colorScalePinkDark"
+	case darker = "colorScalePinkDarker"
+	case darkness = "colorScalePinkDarkness"
+
+}
+
+public enum CFColorScaleDeepBlue: String {
+	case lightness = "colorScaleDeepBlueLightness"
+	case lighter = "colorScaleDeepBlueLighter"
+	case light = "colorScaleDeepBlueLight"
+	case base = "colorScaleDeepBlueBase"
+	case dark = "colorScaleDeepBlueDark"
+	case darker = "colorScaleDeepBlueDarker"
+	case darkness = "colorScaleDeepBlueDarkness"
+
+}
+
+public enum CFColorScaleGreen: String {
+	case lightness = "colorScaleGreenLightness"
+	case lighter = "colorScaleGreenLighter"
+	case light = "colorScaleGreenLight"
+	case base = "colorScaleGreenBase"
+	case dark = "colorScaleGreenDark"
+	case darker = "colorScaleGreenDarker"
+	case darkness = "colorScaleGreenDarkness"
+
+}
+
+public enum CFColorScaleRed: String {
+	case lightness = "colorScaleRedLightness"
+	case lighter = "colorScaleRedLighter"
+	case light = "colorScaleRedLight"
+	case base = "colorScaleRedBase"
+	case dark = "colorScaleRedDark"
+	case darker = "colorScaleRedDarker"
+	case darkness = "colorScaleRedDarkness"
 
 }
 
@@ -152,14 +201,47 @@ public enum CFColorScaleOrange: String {
 
 }
 
-public enum CFPrimaryScaleSecondary: String {
-	case lightness = "primaryScaleSecondaryLightness"
-	case lighter = "primaryScaleSecondaryLighter"
-	case light = "primaryScaleSecondaryLight"
-	case base = "primaryScaleSecondaryBase"
-	case dark = "primaryScaleSecondaryDark"
-	case darker = "primaryScaleSecondaryDarker"
-	case darkness = "primaryScaleSecondaryDarkness"
+public enum CFUtils: String {
+	case clear = "utilsClear"
+
+}
+
+public enum CFColorScaleYellow: String {
+	case lightness = "colorScaleYellowLightness"
+	case lighter = "colorScaleYellowLighter"
+	case light = "colorScaleYellowLight"
+	case base = "colorScaleYellowBase"
+	case dark = "colorScaleYellowDark"
+	case darker = "colorScaleYellowDarker"
+	case darkness = "colorScaleYellowDarkness"
+
+}
+
+public enum CFShadow: String {
+	case none = "shadowNone"
+	case base = "shadowBase"
+
+}
+
+public enum CFColorScaleViolet: String {
+	case lightness = "colorScaleVioletLightness"
+	case lighter = "colorScaleVioletLighter"
+	case light = "colorScaleVioletLight"
+	case base = "colorScaleVioletBase"
+	case dark = "colorScaleVioletDark"
+	case darker = "colorScaleVioletDarker"
+	case darkness = "colorScaleVioletDarkness"
+
+}
+
+public enum CFColorScaleTeal: String {
+	case lightness = "colorScaleTealLightness"
+	case lighter = "colorScaleTealLighter"
+	case light = "colorScaleTealLight"
+	case base = "colorScaleTealBase"
+	case dark = "colorScaleTealDark"
+	case darker = "colorScaleTealDarker"
+	case darkness = "colorScaleTealDarkness"
 
 }
 
@@ -174,14 +256,36 @@ public enum CFColorScaleLavendar: String {
 
 }
 
-public enum CFColorScaleLightGreen: String {
-	case lightness = "colorScaleLightGreenLightness"
-	case lighter = "colorScaleLightGreenLighter"
-	case light = "colorScaleLightGreenLight"
-	case base = "colorScaleLightGreenBase"
-	case dark = "colorScaleLightGreenDark"
-	case darker = "colorScaleLightGreenDarker"
-	case darkness = "colorScaleLightGreenDarkness"
+public enum CFColorScaleScalet: String {
+	case lightness = "colorScaleScaletLightness"
+	case lighter = "colorScaleScaletLighter"
+	case light = "colorScaleScaletLight"
+	case base = "colorScaleScaletBase"
+	case dark = "colorScaleScaletDark"
+	case darker = "colorScaleScaletDarker"
+	case darkness = "colorScaleScaletDarkness"
+
+}
+
+public enum CFPrimaryScaleSecondary: String {
+	case lightness = "primaryScaleSecondaryLightness"
+	case lighter = "primaryScaleSecondaryLighter"
+	case light = "primaryScaleSecondaryLight"
+	case base = "primaryScaleSecondaryBase"
+	case dark = "primaryScaleSecondaryDark"
+	case darker = "primaryScaleSecondaryDarker"
+	case darkness = "primaryScaleSecondaryDarkness"
+
+}
+
+public enum CFColorScaleBlue: String {
+	case lightness = "colorScaleBlueLightness"
+	case lighter = "colorScaleBlueLighter"
+	case light = "colorScaleBlueLight"
+	case base = "colorScaleBlueBase"
+	case dark = "colorScaleBlueDark"
+	case darker = "colorScaleBlueDarker"
+	case darkness = "colorScaleBlueDarkness"
 
 }
 
@@ -210,72 +314,6 @@ public enum CFPrimaryScalePrimary: String {
 
 }
 
-public enum CFColorScaleRed: String {
-	case lightness = "colorScaleRedLightness"
-	case lighter = "colorScaleRedLighter"
-	case light = "colorScaleRedLight"
-	case base = "colorScaleRedBase"
-	case dark = "colorScaleRedDark"
-	case darker = "colorScaleRedDarker"
-	case darkness = "colorScaleRedDarkness"
-
-}
-
-public enum CFColorScaleTeal: String {
-	case lightness = "colorScaleTealLightness"
-	case lighter = "colorScaleTealLighter"
-	case light = "colorScaleTealLight"
-	case base = "colorScaleTealBase"
-	case dark = "colorScaleTealDark"
-	case darker = "colorScaleTealDarker"
-	case darkness = "colorScaleTealDarkness"
-
-}
-
-public enum CFColorScalePurple: String {
-	case lightness = "colorScalePurpleLightness"
-	case lighter = "colorScalePurpleLighter"
-	case light = "colorScalePurpleLight"
-	case base = "colorScalePurpleBase"
-	case dark = "colorScalePurpleDark"
-	case darker = "colorScalePurpleDarker"
-	case darkness = "colorScalePurpleDarkness"
-
-}
-
-public enum CFColorScalePink: String {
-	case lightness = "colorScalePinkLightness"
-	case lighter = "colorScalePinkLighter"
-	case light = "colorScalePinkLight"
-	case base = "colorScalePinkBase"
-	case dark = "colorScalePinkDark"
-	case darker = "colorScalePinkDarker"
-	case darkness = "colorScalePinkDarkness"
-
-}
-
-public enum CFColorScaleGreen: String {
-	case lightness = "colorScaleGreenLightness"
-	case lighter = "colorScaleGreenLighter"
-	case light = "colorScaleGreenLight"
-	case base = "colorScaleGreenBase"
-	case dark = "colorScaleGreenDark"
-	case darker = "colorScaleGreenDarker"
-	case darkness = "colorScaleGreenDarkness"
-
-}
-
-public enum CFColorScaleBlue: String {
-	case lightness = "colorScaleBlueLightness"
-	case lighter = "colorScaleBlueLighter"
-	case light = "colorScaleBlueLight"
-	case base = "colorScaleBlueBase"
-	case dark = "colorScaleBlueDark"
-	case darker = "colorScaleBlueDarker"
-	case darkness = "colorScaleBlueDarkness"
-
-}
-
 public enum CFPrimaryScaleTertiary: String {
 	case lightness = "primaryScaleTertiaryLightness"
 	case lighter = "primaryScaleTertiaryLighter"
@@ -284,44 +322,6 @@ public enum CFPrimaryScaleTertiary: String {
 	case dark = "primaryScaleTertiaryDark"
 	case darker = "primaryScaleTertiaryDarker"
 	case darkness = "primaryScaleTertiaryDarkness"
-
-}
-
-public enum CFColorScaleDeepBlue: String {
-	case lightness = "colorScaleDeepBlueLightness"
-	case lighter = "colorScaleDeepBlueLighter"
-	case light = "colorScaleDeepBlueLight"
-	case base = "colorScaleDeepBlueBase"
-	case dark = "colorScaleDeepBlueDark"
-	case darker = "colorScaleDeepBlueDarker"
-	case darkness = "colorScaleDeepBlueDarkness"
-
-}
-
-public enum CFColorScaleNavy: String {
-	case lightness = "colorScaleNavyLightness"
-	case lighter = "colorScaleNavyLighter"
-	case light = "colorScaleNavyLight"
-	case base = "colorScaleNavyBase"
-	case dark = "colorScaleNavyDark"
-	case darker = "colorScaleNavyDarker"
-	case darkness = "colorScaleNavyDarkness"
-
-}
-
-public enum CFColorScaleViolet: String {
-	case lightness = "colorScaleVioletLightness"
-	case lighter = "colorScaleVioletLighter"
-	case light = "colorScaleVioletLight"
-	case base = "colorScaleVioletBase"
-	case dark = "colorScaleVioletDark"
-	case darker = "colorScaleVioletDarker"
-	case darkness = "colorScaleVioletDarkness"
-
-}
-
-public enum CFUtils: String {
-	case clear = "utilsClear"
 
 }
 
