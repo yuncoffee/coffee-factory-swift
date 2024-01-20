@@ -2,7 +2,7 @@
 //	Typography.swift
 //	Coffee Factory
 //
-//	Created by YunCoffee on 2024. 1. 19.
+//	Created by YunCoffee on 2024. 1. 20.
 //
 
 import Foundation
@@ -76,148 +76,148 @@ extension CGFloat {
 }
 
 public enum Pretendard: String, CaseIterable {
-    case regular = "Pretendard-Regular"
-    case black = "Pretendard-Black"
     case semiBold = "Pretendard-SemiBold"
-    case bold = "Pretendard-Bold"
-    case light = "Pretendard-Light"
     case medium = "Pretendard-Medium"
+    case black = "Pretendard-Black"
+    case regular = "Pretendard-Regular"
+    case light = "Pretendard-Light"
+    case bold = "Pretendard-Bold"
 
 
     public enum FontScale: String, CFFontDescriptor {
-	case title = "Title"
 	case title3 = "Title3"
-	case subTitle = "SubTitle"
-	case largeTitle = "LargeTitle"
-	case body = "Body"
-	case headline = "Headline"
-	case title2 = "Title2"
 	case caption2 = "Caption2"
 	case caption = "Caption"
+	case headline = "Headline"
+	case subTitle = "SubTitle"
+	case body = "Body"
+	case title = "Title"
+	case title2 = "Title2"
 	case display = "Display"
+	case largeTitle = "LargeTitle"
     
         var fontWeight: Pretendard {
             switch self {
-	    case .title:
-		.bold
-	    case .title3:
-		.medium
-	    case .subTitle:
-		.semiBold
-	    case .largeTitle:
-		.bold
-	    case .body:
-		.regular
-	    case .headline:
-		.medium
-	    case .title2:
-		.semiBold
-	    case .caption2:
-		.medium
-	    case .caption:
-		.medium
-	    case .display:
-		.bold
+			case .title3:
+				.medium
+			case .caption2:
+				.medium
+			case .caption:
+				.medium
+			case .headline:
+				.medium
+			case .subTitle:
+				.semiBold
+			case .body:
+				.regular
+			case .title:
+				.bold
+			case .title2:
+				.semiBold
+			case .display:
+				.bold
+			case .largeTitle:
+				.bold
             }
         }
     
         var fontSize: CGFloat {
             switch self {
-	    case .title:
-		24.0
-	    case .title3:
-		20.0
-	    case .subTitle:
-		18.0
-	    case .largeTitle:
-		32.0
-	    case .body:
-		14.0
-	    case .headline:
-		16.0
-	    case .title2:
-		22.0
-	    case .caption2:
-		10.0
-	    case .caption:
-		12.0
-	    case .display:
-		36.0
+			case .title3:
+				20.0
+			case .caption2:
+				10.0
+			case .caption:
+				12.0
+			case .headline:
+				16.0
+			case .subTitle:
+				18.0
+			case .body:
+				14.0
+			case .title:
+				24.0
+			case .title2:
+				22.0
+			case .display:
+				36.0
+			case .largeTitle:
+				32.0
             }
         }
     
         var lineHeight: CGFloat {
             switch self {
-	    case .title:
-		36.0
-	    case .title3:
-		30.0
-	    case .subTitle:
-		27.0
-	    case .largeTitle:
-		48.0
-	    case .body:
-		21.0
-	    case .headline:
-		24.0
-	    case .title2:
-		33.0
-	    case .caption2:
-		15.0
-	    case .caption:
-		18.0
-	    case .display:
-		54.0
+			case .title3:
+				5.0
+			case .caption2:
+				2.0
+			case .caption:
+				3.0
+			case .headline:
+				4.0
+			case .subTitle:
+				4.0
+			case .body:
+				3.0
+			case .title:
+				6.0
+			case .title2:
+				5.0
+			case .display:
+				9.0
+			case .largeTitle:
+				8.0
             }
         }
     
         var letterSpacing: CGFloat {
             switch self {
-	    case .title:
-		0.0
-	    case .title3:
-		0.0
-	    case .subTitle:
-		0.0
-	    case .largeTitle:
-		0.0
-	    case .body:
-		0.0
-	    case .headline:
-		0.0
-	    case .title2:
-		0.0
-	    case .caption2:
-		0.0
-	    case .caption:
-		0.0
-	    case .display:
-		0.0
+			case .title3:
+				0.0
+			case .caption2:
+				0.0
+			case .caption:
+				0.0
+			case .headline:
+				0.0
+			case .subTitle:
+				0.0
+			case .body:
+				0.0
+			case .title:
+				0.0
+			case .title2:
+				0.0
+			case .display:
+				0.0
+			case .largeTitle:
+				0.0
             }
         }
     
         var relativeTo: Font.TextStyle {
             switch self {
-	    case .title:
-		.body
-	    case .title3:
-		.body
-	    case .subTitle:
-		.body
-	    case .largeTitle:
-		.body
-	    case .body:
-		.body
-	    case .headline:
-		.body
-	    case .title2:
-		.body
-	    case .caption2:
-		.body
-	    case .caption:
-		.body
-	    case .display:
-		.body
+			case .title3:
+				.body
+			case .caption2:
+				.body
+			case .caption:
+				.body
+			case .headline:
+				.body
+			case .subTitle:
+				.body
+			case .body:
+				.body
+			case .title:
+				.body
+			case .title2:
+				.body
+			case .display:
+				.body
+			case .largeTitle:
+				.body
             }
         }
     }
