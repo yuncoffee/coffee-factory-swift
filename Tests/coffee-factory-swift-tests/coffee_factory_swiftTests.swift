@@ -1,5 +1,5 @@
 import XCTest
-@testable import coffee_factory_swift
+@testable import CoffeeFactorySwift
 
 final class CoffeeFactorySwiftTests: XCTestCase {
     func testExample() throws {
@@ -10,6 +10,6 @@ final class CoffeeFactorySwiftTests: XCTestCase {
     }
     
     func testCGFloat() throws {
-        XCTAssertEqual(CGFloat.spacing100, CoffeeFactorySwift.init().myFloat)
+        XCTAssertEqual(CGFloat.spacing100, 200)
     }
 }
