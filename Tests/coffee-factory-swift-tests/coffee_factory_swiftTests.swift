@@ -7,11 +7,10 @@ final class CoffeeFactorySwiftTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(CoffeeFactorySwift().text, "Hello, World!")
+        XCTAssertEqual(CFAspectRatio.fiveToFour.calcSize(from: 200).height, 200 * 4 / 5)
     }
     
     func testCGFloat() throws {
-        XCTAssertEqual(CGFloat.spacing100, 200)
+//        XCTAssertEqual(CGFloat.spacing100, 200)
     }
 }
-

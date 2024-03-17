@@ -20,11 +20,6 @@ struct Test_Previews: PreviewProvider {
             Text("HELLO")
             Text("WORLD")
         }
-        .pretendard(.largeTitle)
-        .frame(320, ratio: .nineToSixteen)
-        .background(Color.yellow)
-        .frame(width: 640,height: 500)
-        .background(Color.blue)
         .padding(24)
     }
 }
