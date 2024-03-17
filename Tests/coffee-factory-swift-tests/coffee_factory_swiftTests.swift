@@ -1,4 +1,5 @@
 import XCTest
+import SwiftUI
 @testable import CoffeeFactorySwift
 
 final class CoffeeFactorySwiftTests: XCTestCase {
@@ -13,3 +14,4 @@ final class CoffeeFactorySwiftTests: XCTestCase {
         XCTAssertEqual(CGFloat.spacing100, 200)
     }
 }
+
