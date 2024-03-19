@@ -21,7 +21,7 @@ struct CFLabelData {
     }
 }
 
-struct CFLabel: View, StyleEssential, LabelStyleEssential {
+public struct CFLabel: View, StyleEssential, LabelStyleEssential {
     var content: CFLabelData
     
     var type: LabelType = .text
@@ -38,7 +38,7 @@ struct CFLabel: View, StyleEssential, LabelStyleEssential {
     var width: CGFloat?
     var padding: CFPadding = .init(v: .cfSpacing(.xxxsmall), h: .cfSpacing(.xxsmall))
         
-    var body: some View {
+    public var body: some View {
         let _alignStyle = content.icon != nil && alignStyle != .textOnly 
         ? alignStyle
         : content.icon != nil
