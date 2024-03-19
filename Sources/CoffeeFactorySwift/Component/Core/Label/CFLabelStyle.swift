@@ -8,6 +8,20 @@
 import Foundation
 import SwiftUI
 
+struct CFLabelFontStyle {
+    var weight: Pretendard
+    var scale: Pretendard.FontScale
+    
+    init(weight: Pretendard, scale: Pretendard.FontScale) {
+        self.weight = weight
+        self.scale = scale
+    }
+    
+    init(scale: Pretendard.FontScale) {
+        self.init(weight: scale.fontWeight, scale: scale)
+    }
+}
+
 protocol LabelStyleEssential {
     var alignStyle: LabelAlignStyle { get }
     var iconSize: CGFloat? { get }
@@ -71,6 +85,31 @@ enum LabelSize {
     case largeTitle
     case title
     
+    var defaultFont: CFLabelFontStyle {
+        switch self {
+        case .caption:
+                .init(scale: .caption)
+        case .title3:
+                .init(scale: .title3)
+        case .headline:
+                .init(scale: .headline)
+        case .body:
+                .init(scale: .body)
+        case .display:
+                .init(scale: .display)
+        case .title2:
+                .init(scale: .title2)
+        case .subTitle:
+                .init(scale: .subTitle)
+        case .caption2:
+                .init(scale: .caption2)
+        case .largeTitle:
+                .init(scale: .largeTitle)
+        case .title:
+                .init(scale: .title)
+        }
+    }
+    
     var height: CGFloat {
         switch self {
         case .caption:
@@ -98,18 +137,18 @@ enum LabelSize {
 }
 
 public struct CFLabelStyle: LabelStyle, StyleEssential, LabelStyleEssential {
-    var type: LabelType = .blockFill(.systemValue(.small))
-    var size: LabelSize
-    var color: Color = .clear
+    var type: LabelType = .text
+    var size: LabelSize = .body
+    var color: Color = .cf(.grayScale(.black))
     
     var alignStyle: LabelAlignStyle = .textOnly
     var iconSize: CGFloat?
     var contentColor: Color?
     
-    var fontStyle: (weight: Pretendard, scale: Pretendard.FontScale)
-    var expandable: Bool = false
+    var fontStyle: CFLabelFontStyle
     var width: CGFloat?
-    var padding: (v: CGFloat, h: CGFloat)
+    var padding: CFPadding = .init()
+    var expandable: Bool = false
     
     public func makeBody(configuration: Configuration) -> some View {
         if let style = type.style {
@@ -121,8 +160,10 @@ public struct CFLabelStyle: LabelStyle, StyleEssential, LabelStyleEssential {
                 alignStyle: alignStyle
             )
             .pretendard(fontStyle.scale, weight: fontStyle.weight)
-            .padding(.vertical, padding.v)
-            .padding(.horizontal, padding.h)
+            .padding(.init(top: padding.top,
+                           leading: padding.leading,
+                           bottom: padding.bottom,
+                           trailing: padding.trailing))
             .frame(
                 minWidth: width,
                 maxWidth: expandable ? .infinity : nil,
@@ -143,7 +184,7 @@ public struct CFLabelStyle: LabelStyle, StyleEssential, LabelStyleEssential {
             )
             .overlay {
                 RoundedRectangle(cornerRadius: style.cornerStyle.cornerRadius)
-                    .stroke(style.fillStyle.isLook(.text) ? .clear : color, lineWidth: 2)
+                    .stroke(style.fillStyle.isLook(.text) ? .clear : color, lineWidth: .cfStroke(.small))
             }
             .clipShape(RoundedRectangle(cornerRadius: style.cornerStyle.cornerRadius))
         } else {
@@ -158,9 +199,11 @@ public struct CFLabelStyle: LabelStyle, StyleEssential, LabelStyleEssential {
 
 struct CFLabelContent: View, StyleConfiguration, LabelStyleEssential {
     var configuration: LabelStyleConfiguration
+    
     var type: LabelType
     var size: LabelSize
     var color: Color
+    
     var alignStyle: LabelAlignStyle
     var iconSize: CGFloat?
     var contentColor: Color?

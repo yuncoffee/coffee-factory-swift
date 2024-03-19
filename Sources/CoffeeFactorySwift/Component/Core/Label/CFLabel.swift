@@ -7,8 +7,22 @@
 
 import SwiftUI
 
+struct CFLabelData {
+    var text: String
+    var icon: String?
+    
+    init(_ text: String, icon: String? = nil) {
+        self.text = text
+        self.icon = icon
+    }
+    
+    var systemImage: String {
+        icon ?? "square.split.diagonal.2x2"
+    }
+}
+
 struct CFLabel: View, StyleEssential, LabelStyleEssential {
-    var content: (label: String, icon: String?) = ("Label", icon : nil)
+    var content: CFLabelData
     
     var type: LabelType = .text
     var size: LabelSize = .body
@@ -19,37 +33,56 @@ struct CFLabel: View, StyleEssential, LabelStyleEssential {
     var contentColor: Color?
     
     var expandable: Bool = false
-    var fontStyle: (weight: Pretendard, scale: Pretendard.FontScale) = (weight: .regular, scale: .body)
+    var fontStyle: CFLabelFontStyle?
     
     var width: CGFloat?
-    var padding: (v: CGFloat, h: CGFloat) = (v: .cfSpacing(.xxxsmall), h: .cfSpacing(.xxxsmall))
-    
-    
+    var padding: CFPadding = .init(v: .cfSpacing(.xxxsmall), h: .cfSpacing(.xxsmall))
+        
     var body: some View {
-        Label(content.label, systemImage: content.icon ?? "cup.and.saucer.fill")
+        let _alignStyle = content.icon != nil && alignStyle != .textOnly 
+        ? alignStyle
+        : content.icon != nil
+        ? .iconWithText
+        : .textOnly
+        
+        Label(content.text, systemImage: content.systemImage)
             .labelStyle(
                 CFLabelStyle(
                     type: type,
                     size: size,
                     color: color,
-                    alignStyle: alignStyle,
+                    alignStyle: _alignStyle,
                     iconSize: iconSize,
                     contentColor: contentColor,
-                    fontStyle: fontStyle,
-                    expandable: expandable,
-                    width: width,
-                    padding: padding
+                    fontStyle: (fontStyle != nil) ? fontStyle! : size.defaultFont,
+                    width: width, 
+                    padding: padding,
+                    expandable: expandable
                 )
             )
     }
 }
 
 #Preview {
-    CFLabel(content: (label: "가나다라마바사아자차카타파하", icon: nil),
-            alignStyle: .textWithIcon,
-            fontStyle: (weight: .bold, scale: .title)
-    )
-    .border(.blue)
-    .padding(24)
-    .border(.red)
+    VStack {
+        CFLabel(content: .init("Hello World"))
+        
+        CFLabel(content: .init("Sample with Text With Icon", icon: "star.fill"))
+        
+        CFLabel(content: .init("Sample with type"),
+                type: .blockFill(.cfRadius(.xsmall))
+        )
+        
+        CFLabel(content: .init("Sample with size"), 
+                type: .blockLine(.cfRadius(.xxsmall)),
+                size: .headline
+        )
+        
+        CFLabel(content: .init("Sample with Color"),
+                type: .blockFill(.cfRadius(.xxsmall)),
+                color: .cf(.primaryScale(.secondary(.base)))
+        )
+        
+    }
+    .padding(.cfFrame(.large))
 }

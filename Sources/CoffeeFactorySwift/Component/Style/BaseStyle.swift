@@ -7,6 +7,35 @@
 
 import Foundation
 
+struct CFPadding {
+    var top: CGFloat
+    var leading: CGFloat
+    var bottom: CGFloat
+    var trailing: CGFloat
+    
+    init(t top: CGFloat,  l leading: CGFloat, b bottom: CGFloat, t trailing: CGFloat) {
+        self.top = top
+        self.leading = leading
+        self.bottom = bottom
+        self.trailing = trailing
+    }
+    
+    init(v vertical: CGFloat, h horizontal: CGFloat) {
+        self.top = vertical
+        self.bottom = vertical
+        self.leading = horizontal
+        self.trailing = horizontal
+    }
+    
+    init(_ all: CGFloat = .zero) {
+        self.top = all
+        self.leading = all
+        self.bottom = all
+        self.trailing = all
+    }
+}
+
+
 protocol StyleEssential {
     associatedtype ComponentType
     associatedtype ComponentSize
@@ -23,8 +52,8 @@ protocol StyleConfiguration: StyleEssential {
 }
 
 enum ComponentCornerBlockStyle {
-    case systemValue(CFRadius)
-    case customValue(CGFloat)
+    case cfRadius(CFRadius)
+    case cgFloat(CGFloat)
 }
 
 /// default - fillStyle: .fill, corenrStyle: .box
@@ -39,7 +68,7 @@ public struct ComponentStyle {
         /// ```
         /// cornerRadius: CGFloat.CFRadius.small
         /// ```
-        case block(ComponentCornerBlockStyle = .systemValue(.small))
+        case block(ComponentCornerBlockStyle = .cfRadius(.small))
         /// 라운딩 미적용 rawValue = 0
         ///
         /// ```
@@ -58,9 +87,9 @@ public struct ComponentStyle {
             switch self {
             case .block(let radius):
                 switch radius {
-                case .systemValue(let cfRadius):
+                case .cfRadius(let cfRadius):
                     return cfRadius.rawValue
-                case .customValue(let cgFloat):
+                case .cgFloat(let cgFloat):
                     return cgFloat
                 }
             case .box:
@@ -160,9 +189,9 @@ enum BaseType: ComponentBaseType {
     var style: ComponentStyle? {
         switch self {
         case .blockFill:
-            ComponentStyle(cornerStyle: .block(.systemValue(.small)))
+            ComponentStyle(cornerStyle: .block(.cfRadius(.small)))
         case .blockLine:
-            ComponentStyle(cornerStyle: .block(.systemValue(.small)), fillStyle: .line)
+            ComponentStyle(cornerStyle: .block(.cfRadius(.small)), fillStyle: .line)
         case .boxFill:
             ComponentStyle()
         case .boxLine:
