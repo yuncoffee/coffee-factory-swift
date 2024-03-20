@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CFPadding {
+public struct CFPadding {
     var top: CGFloat
     var leading: CGFloat
     var bottom: CGFloat
@@ -35,6 +35,7 @@ struct CFPadding {
     }
 }
 
+public typealias Expandable = Bool
 
 protocol StyleEssential {
     associatedtype ComponentType

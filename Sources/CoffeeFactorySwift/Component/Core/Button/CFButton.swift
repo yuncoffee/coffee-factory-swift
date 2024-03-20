@@ -12,37 +12,92 @@ public protocol ButtonComposable {}
 extension CFLabel: ButtonComposable {}
 extension EmptyView: ButtonComposable {}
 
-
 public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable {
     var type: CFButtonType = .blockFill
     var size: CFButtonSize = .small
-    var color: Color = .cf(.primaryScale(.primary(.base)))
+    @State var color: Color = .cf(.primaryScale(.primary(.base)))
     
-    var cfLabel: (_ type: LabelType) -> T?
+    var expandable: Expandable = true
+    
+    var width: CGFloat?
+    
+    var cfLabel: (_ type: LabelType, _ color: Color, _: Expandable) -> T?
     var action: () -> ()
 
+    @State var isHover = false
+    
     public var body: some View {
         Button {
             action()
         } label: {
-            cfLabel(type.asLabelType)
+            cfLabel(type.asLabelType, color, expandable)
         }
         .buttonStyle(CFButtonStyle(type: type, size: size, color: color))
+        .padding(.horizontal, .cfSpacing(.xxxsmall))
+        .padding(.top, .zero)
+        .frame(maxWidth: width != nil ? width : .infinity,
+               minHeight: size.height,
+               maxHeight: size.height)
+        .onHover { hovering in
+            withAnimation {
+                isHover = hovering
+            }
+        }
+        .onChange(of: isHover) { isHover in
+            withAnimation {
+                color = isHover 
+                ? .cf(.primaryScale(.primary(.dark)))
+                : .cf(.primaryScale(.secondary(.dark)))
+            }
+        }
     }
 }
 
 extension CFButton where T == CFLabel {
-    init(title: String, action: @escaping () -> ()) {
-        self.init { type in
-            CFLabel(content: .init(title), type: type)
+    init(title: String, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: Color = .cf(.primaryScale(.primary(.base))), width: CGFloat? = nil, action: @escaping () -> ()) {
+        
+        var fontStyle: CFLabelFontStyle
+        
+        switch size {
+        case .xsamll:
+            fontStyle = .init(scale: .caption)
+        case .xlarge:
+            fontStyle = .init(scale: .headline)
+        default:
+            fontStyle = .init(scale: .body)
+        }
+        
+        self.init(type: type, size: size, width: width) { type, color, expandable  in
+            CFLabel(content: .init(title),
+                    type: type,
+                    color: color,
+                    expandable: expandable,
+                    fontStyle: fontStyle,
+                    padding: .init(v: 0, h: 6))
         } action: {
             action()
         }
     }
     
-    init(content: CFLabelData, color: Color, action:  @escaping () -> ()) {
-        self.init { type in
-            CFLabel(content: content, type: type, color: color)
+    init(content: CFLabelData, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: Color = .cf(.primaryScale(.primary(.base))), action:  @escaping () -> ()) {
+        var fontStyle: CFLabelFontStyle
+        
+        switch size {
+        case .xsamll:
+            fontStyle = .init(scale: .caption)
+        case .xlarge:
+            fontStyle = .init(scale: .headline)
+        default:
+            fontStyle = .init(scale: .body)
+        }
+        
+        self.init(size: size) { type, color, expandable  in
+            CFLabel(content: content,
+                    type: type,
+                    color: color,
+                    expandable: expandable, 
+                    fontStyle: fontStyle,
+                    padding: .init(v: 0, h: 6))
         } action: {
             action()
         }
@@ -52,23 +107,23 @@ extension CFButton where T == CFLabel {
 
 #Preview {
     VStack {
-        CFButton<EmptyView> { type in
-            EmptyView()
-        } action: {
-            print("HELLO")
-        }
-        CFButton(title: "HELLOWORLD") {
+        CFButton(title: "HELLOWORLD", width: 120) {
             print("HELLO WORLD!")
         }
-        CFButton(content: .init("Test", icon: "star.fill"), color: .blue) {
+        .border(.red)
+        CFButton(content: .init("Test", icon: "star.fill")) {
             print("HELLO WORLD!")
         }
-        CFButton { type in
-            CFLabel(content: .init("HELLO WORLD!"))
+        .border(.red)
+        CFButton { type, color, expandable  in
+            CFLabel(content: .init("HELLO WORLD!"), expandable: expandable)
         } action: {
             print("Tester")
         }
-
+        .border(.red)
+        CFButton(title: "Test", type: .boxLine, size: .xlarge) {
+            print("HHHH")
+        }
     }
     .padding(.cfFrame(.medium))
 }
@@ -127,6 +182,21 @@ enum CFButtonSize {
     case medium
     case large
     case xlarge
+    
+    var height: CGFloat {
+        switch self {
+        case .xsamll:
+            28
+        case .small:
+            32
+        case .medium:
+            36
+        case .large:
+            40
+        case .xlarge:
+            48
+        }
+    }
 }
 
 
@@ -150,6 +220,6 @@ struct CFButtonContent: View, StyleConfiguration {
     
     var body: some View {
         configuration.label
-            .border(.red)
+            .frame(maxWidth: .infinity, maxHeight: size.height)
     }
 }
