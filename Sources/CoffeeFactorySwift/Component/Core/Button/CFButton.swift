@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by yuncoffee on 1/23/24.
 //
@@ -15,46 +15,87 @@ extension EmptyView: ButtonComposable {}
 public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable {
     var type: CFButtonType = .blockFill
     var size: CFButtonSize = .small
-    @State var color: Color = .cf(.primaryScale(.primary(.base)))
+    var color: CFColor = .primaryScale(.primary(.base))
     
     var expandable: Expandable = true
     
     var width: CGFloat?
     
+    @State private var displayColor: Color
+    @State private var didLongPress = false
+    @State private var didHover = false
+    
+    private var hoverColor: Color {
+        color.nextColor(after: 1)
+    }
+    private var pressColor: Color {
+        color.nextColor(after: 2)
+    }
+    private var shadowColor: Color {
+        didLongPress || didHover ? .black.opacity(0.25) : .black.opacity(0)
+    }
+    
     var cfLabel: (_ type: LabelType, _ color: Color, _: Expandable) -> T?
     var action: () -> ()
 
-    @State var isHover = false
-    
     public var body: some View {
         Button {
             action()
         } label: {
-            cfLabel(type.asLabelType, color, expandable)
+            ZStack {
+                #if os(iOS)
+                    RoundedRectangle(cornerRadius: type.radius)
+                        .shadow(color: shadowColor,
+                                radius: didLongPress ? 1 : 3,
+                                x: 0,
+                                y: 2)
+                    RoundedRectangle(cornerRadius: type.radius)
+                        .blendMode(.destinationOut)
+                    RoundedRectangle(cornerRadius: type.radius, style: .continuous)
+                        .fill(.clear)
+                #endif
+                cfLabel(type.asLabelType, displayColor, expandable)
+                    .contentShape(Rectangle())
+                    .padding(.top, didLongPress ? .cfSpacing(.xxsmall) : .zero)
+                    
+            }
+            .compositingGroup()
         }
-        .buttonStyle(CFButtonStyle(type: type, size: size, color: color))
+        .buttonStyle(CFButtonStyle(type: type, size: size, color: displayColor))
         .padding(.horizontal, .cfSpacing(.xxxsmall))
-        .padding(.top, .zero)
         .frame(maxWidth: width != nil ? width : .infinity,
                minHeight: size.height,
                maxHeight: size.height)
         .onHover { hovering in
-            withAnimation {
-                isHover = hovering
-            }
+            didHover = hovering
         }
-        .onChange(of: isHover) { isHover in
-            withAnimation {
-                color = isHover 
-                ? .cf(.primaryScale(.primary(.dark)))
-                : .cf(.primaryScale(.secondary(.dark)))
-            }
+        .onChange(of: didHover) { didHover in
+            displayColor = didHover
+            ? hoverColor
+            : color.color
+        }
+        .onLongPressGesture(minimumDuration: 0.1) {
+            print("HHHHHHHH")
+        } onPressingChanged: { pressing in
+            didLongPress = pressing
+            displayColor = pressing
+            ? pressColor
+            : didHover
+            ? hoverColor
+            : color.color
+        }
+    }
+    
+    @available(macOS, unavailable)
+    private func shadowEffect() -> some View {
+        VStack {
+            Text("HELLO")
         }
     }
 }
 
 extension CFButton where T == CFLabel {
-    init(title: String, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: Color = .cf(.primaryScale(.primary(.base))), width: CGFloat? = nil, action: @escaping () -> ()) {
+    init(title: String, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, action: @escaping () -> ()) {
         
         var fontStyle: CFLabelFontStyle
         
@@ -67,7 +108,7 @@ extension CFButton where T == CFLabel {
             fontStyle = .init(scale: .body)
         }
         
-        self.init(type: type, size: size, width: width) { type, color, expandable  in
+        self.init(type: type, size: size, width: width, displayColor: color.color) { type, color, expandable  in
             CFLabel(content: .init(title),
                     type: type,
                     color: color,
@@ -79,7 +120,7 @@ extension CFButton where T == CFLabel {
         }
     }
     
-    init(content: CFLabelData, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: Color = .cf(.primaryScale(.primary(.base))), action:  @escaping () -> ()) {
+    init(content: CFLabelData, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), action:  @escaping () -> ()) {
         var fontStyle: CFLabelFontStyle
         
         switch size {
@@ -91,11 +132,11 @@ extension CFButton where T == CFLabel {
             fontStyle = .init(scale: .body)
         }
         
-        self.init(size: size) { type, color, expandable  in
+        self.init(size: size, displayColor: color.color) { type, color, expandable  in
             CFLabel(content: content,
                     type: type,
                     color: color,
-                    expandable: expandable, 
+                    expandable: expandable,
                     fontStyle: fontStyle,
                     padding: .init(v: 0, h: 6))
         } action: {
@@ -114,18 +155,15 @@ extension CFButton where T == CFLabel {
         CFButton(content: .init("Test", icon: "star.fill")) {
             print("HELLO WORLD!")
         }
-        .border(.red)
-        CFButton { type, color, expandable  in
-            CFLabel(content: .init("HELLO WORLD!"), expandable: expandable)
-        } action: {
-            print("Tester")
-        }
-        .border(.red)
         CFButton(title: "Test", type: .boxLine, size: .xlarge) {
+            print("HHHH")
+        }
+        CFButton(title: "Test", type: .text, size: .xlarge) {
             print("HHHH")
         }
     }
     .padding(.cfFrame(.medium))
+    .background(Color.white)
 }
 
 enum CFButtonType {
@@ -172,6 +210,25 @@ enum CFButtonType {
             return .roundLine
         case .text:
             return .text
+        }
+    }
+    
+    var radius: CGFloat {
+        switch self {
+        case .blockFill:
+                .cfRadius(.xsmall)
+        case .blockLine:
+                .cfRadius(.xsmall)
+        case .boxFill:
+                .cfRadius(.square)
+        case .boxLine:
+                .cfRadius(.square)
+        case .roundFill:
+                .cfRadius(.round)
+        case .roundLine:
+                .cfRadius(.round)
+        case .text:
+                .cfRadius(.square)
         }
     }
 }
