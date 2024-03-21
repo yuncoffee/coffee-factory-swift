@@ -52,7 +52,7 @@ protocol StyleConfiguration: StyleEssential {
     var configuration: ConfigurationType { get }
 }
 
-enum ComponentCornerBlockStyle {
+public enum ComponentCornerBlockStyle {
     case cfRadius(CFRadius)
     case cgFloat(CGFloat)
 }

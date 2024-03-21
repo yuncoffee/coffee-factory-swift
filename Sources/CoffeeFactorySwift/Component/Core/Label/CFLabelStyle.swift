@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CFLabelFontStyle {
+public struct CFLabelFontStyle {
     var weight: Pretendard
     var scale: Pretendard.FontScale
     
@@ -28,7 +28,7 @@ protocol LabelStyleEssential {
     var contentColor: Color? { get }
 }
 
-enum LabelAlignStyle {
+public enum LabelAlignStyle {
     case iconWithText
     case textWithIcon
     case iconOnly
@@ -36,7 +36,7 @@ enum LabelAlignStyle {
     case verticalIconWithText
 }
 
-enum LabelType: ComponentBaseType {
+public enum LabelType: ComponentBaseType {
     case blockFill(ComponentCornerBlockStyle)
     case blockLine(ComponentCornerBlockStyle)
     case boxFill
@@ -73,7 +73,7 @@ enum LabelType: ComponentBaseType {
     }
 }
 
-enum LabelSize {
+public enum LabelSize {
     case caption
     case title3
     case headline
