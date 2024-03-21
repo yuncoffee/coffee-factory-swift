@@ -14,11 +14,11 @@ public extension View {
     }
 }
 
-struct EdgeBorder: Shape {
+public struct EdgeBorder: Shape {
     var width: CGFloat
     var edges: [Edge]
 
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         edges.map { edge -> Path in
             switch edge {
             case .top:

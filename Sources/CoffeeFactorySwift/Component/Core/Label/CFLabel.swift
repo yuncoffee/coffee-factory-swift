@@ -11,7 +11,7 @@ public struct CFLabelData {
     var text: String
     var icon: String?
     
-    init(_ text: String, icon: String? = nil) {
+    public init(_ text: String, icon: String? = nil) {
         self.text = text
         self.icon = icon
     }

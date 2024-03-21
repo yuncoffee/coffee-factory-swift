@@ -12,12 +12,12 @@ public struct CFLabelFontStyle {
     var weight: Pretendard
     var scale: Pretendard.FontScale
     
-    init(weight: Pretendard, scale: Pretendard.FontScale) {
+    public init(weight: Pretendard, scale: Pretendard.FontScale) {
         self.weight = weight
         self.scale = scale
     }
     
-    init(scale: Pretendard.FontScale) {
+    public init(scale: Pretendard.FontScale) {
         self.init(weight: scale.fontWeight, scale: scale)
     }
 }
