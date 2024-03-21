@@ -21,6 +21,8 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
     
     var width: CGFloat?
     
+    var hasPressAnimation = true
+    
     @State private var displayColor: Color
     @State private var didLongPress = false
     @State private var didHover = false
@@ -32,7 +34,7 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
         color.nextColor(after: 2)
     }
     private var shadowColor: Color {
-        didLongPress || didHover ? .black.opacity(0.25) : .black.opacity(0)
+        hasPressAnimation && didLongPress || didHover ? .black.opacity(0.25) : .black.opacity(0)
     }
     
     var cfLabel: (_ type: LabelType, _ color: Color, _: Expandable) -> T?
@@ -46,7 +48,7 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
                 #if os(iOS)
                     RoundedRectangle(cornerRadius: type.radius)
                         .shadow(color: shadowColor,
-                                radius: didLongPress ? 1 : 3,
+                                radius: hasPressAnimation && didLongPress ? 1 : 3,
                                 x: 0,
                                 y: 2)
                     RoundedRectangle(cornerRadius: type.radius)
@@ -56,7 +58,7 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
                 #endif
                 cfLabel(type.asLabelType, displayColor, expandable)
                     .contentShape(Rectangle())
-                    .padding(.top, didLongPress ? .cfSpacing(.xxsmall) : .zero)
+                    .padding(.top, hasPressAnimation && didLongPress ? .cfSpacing(.xxsmall) : .zero)
                     
             }
             .compositingGroup()
@@ -95,7 +97,7 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
 }
 
 public extension CFButton where T == CFLabel {
-    init(title: String, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, action: @escaping () -> ()) {
+    init(title: String, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, hasPressAnimation: Bool = true, action: @escaping () -> ()) {
         
         var fontStyle: CFLabelFontStyle
         
@@ -108,7 +110,7 @@ public extension CFButton where T == CFLabel {
             fontStyle = .init(scale: .body)
         }
         
-        self.init(type: type, size: size, width: width, displayColor: color.color) { type, color, expandable  in
+        self.init(type: type, size: size, width: width, hasPressAnimation: hasPressAnimation, displayColor: color.color) { type, color, expandable  in
             CFLabel(content: .init(title),
                     type: type,
                     color: color,
@@ -120,7 +122,7 @@ public extension CFButton where T == CFLabel {
         }
     }
     
-    init(content: CFLabelData, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), action:  @escaping () -> ()) {
+    init(content: CFLabelData, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, hasPressAnimation: Bool = true, action: @escaping () -> ()) {
         var fontStyle: CFLabelFontStyle
         
         switch size {
@@ -132,7 +134,7 @@ public extension CFButton where T == CFLabel {
             fontStyle = .init(scale: .body)
         }
         
-        self.init(size: size, displayColor: color.color) { type, color, expandable  in
+        self.init(size: size, width: width, hasPressAnimation: hasPressAnimation, displayColor: color.color) { type, color, expandable  in
             CFLabel(content: content,
                     type: type,
                     color: color,
@@ -158,7 +160,7 @@ public extension CFButton where T == CFLabel {
         CFButton(title: "Test", type: .boxLine, size: .xlarge) {
             print("HHHH")
         }
-        CFButton(title: "Test", type: .text, size: .xlarge) {
+        CFButton(title: "Test", type: .text, size: .xlarge, hasPressAnimation: false) {
             print("HHHH")
         }
     }
