@@ -94,7 +94,7 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
     }
 }
 
-extension CFButton where T == CFLabel {
+public extension CFButton where T == CFLabel {
     init(title: String, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, action: @escaping () -> ()) {
         
         var fontStyle: CFLabelFontStyle
@@ -166,7 +166,7 @@ extension CFButton where T == CFLabel {
     .background(Color.white)
 }
 
-enum CFButtonType {
+public enum CFButtonType {
     case blockFill
     case blockLine
     case boxFill
@@ -233,7 +233,7 @@ enum CFButtonType {
     }
 }
 
-enum CFButtonSize {
+public enum CFButtonSize {
     case xsamll
     case small
     case medium

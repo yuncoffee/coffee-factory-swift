@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CFLabelData {
+public struct CFLabelData {
     var text: String
     var icon: String?
     
