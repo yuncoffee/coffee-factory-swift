@@ -61,6 +61,20 @@ public struct CFLabel: View, StyleEssential, LabelStyleEssential {
                 )
             )
     }
+    
+    public init(content: CFLabelData, type: LabelType = .text, size: LabelSize = .body, color: Color = .cf(.grayScale(.black)), alignStyle: LabelAlignStyle = .textOnly, iconSize: CGFloat? = nil, contentColor: Color? = nil, expandable: Bool = false, fontStyle: CFLabelFontStyle? = nil, width: CGFloat? = nil, padding: CFPadding = .init(v: .cfSpacing(.xxxsmall), h: .cfSpacing(.xxsmall))) {
+        self.content = content
+        self.type = type
+        self.size = size
+        self.color = color
+        self.alignStyle = alignStyle
+        self.iconSize = iconSize
+        self.contentColor = contentColor
+        self.expandable = expandable
+        self.fontStyle = fontStyle
+        self.width = width
+        self.padding = padding
+    }
 }
 
 #Preview {

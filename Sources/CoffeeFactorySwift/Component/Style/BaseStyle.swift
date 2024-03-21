@@ -13,21 +13,21 @@ public struct CFPadding {
     var bottom: CGFloat
     var trailing: CGFloat
     
-    init(t top: CGFloat,  l leading: CGFloat, b bottom: CGFloat, t trailing: CGFloat) {
+    public init(t top: CGFloat,  l leading: CGFloat, b bottom: CGFloat, t trailing: CGFloat) {
         self.top = top
         self.leading = leading
         self.bottom = bottom
         self.trailing = trailing
     }
     
-    init(v vertical: CGFloat, h horizontal: CGFloat) {
+    public init(v vertical: CGFloat, h horizontal: CGFloat) {
         self.top = vertical
         self.bottom = vertical
         self.leading = horizontal
         self.trailing = horizontal
     }
     
-    init(_ all: CGFloat = .zero) {
+    public init(_ all: CGFloat = .zero) {
         self.top = all
         self.leading = all
         self.bottom = all
