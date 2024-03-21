@@ -79,7 +79,7 @@ public extension View {
 
 public extension CGSize {
     static func cfRatio(_ width: CGFloat, ratio: CFAspectRatio) -> CGSize {
-        ratio.calcSize(from: width)
+        width == 0 ? .zero : ratio.calcSize(from: width)
     }
 }
 
