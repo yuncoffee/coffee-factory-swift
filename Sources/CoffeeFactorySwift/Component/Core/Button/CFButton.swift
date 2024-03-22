@@ -22,6 +22,7 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
     var width: CGFloat?
     
     var hasPressAnimation = true
+    var hasHapticFeedback = true
     
     @State private var displayColor: Color
     @State private var didLongPress = false
@@ -42,6 +43,7 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
 
     public var body: some View {
         Button {
+            if hasHapticFeedback { Haptics.impact(.light).run() }
             action()
         } label: {
             ZStack {
@@ -97,7 +99,7 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
 }
 
 public extension CFButton where T == CFLabel {
-    init(title: String, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, hasPressAnimation: Bool = true, action: @escaping () -> ()) {
+    init(title: String, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, hasPressAnimation: Bool = true, hasHapticFeedback: Bool = true, action: @escaping () -> ()) {
         
         var fontStyle: CFLabelFontStyle
         
@@ -110,7 +112,7 @@ public extension CFButton where T == CFLabel {
             fontStyle = .init(scale: .body)
         }
         
-        self.init(type: type, size: size, width: width, hasPressAnimation: hasPressAnimation, displayColor: color.color) { type, color, expandable  in
+        self.init(type: type, size: size, width: width, hasPressAnimation: hasPressAnimation, hasHapticFeedback: hasHapticFeedback, displayColor: color.color) { type, color, expandable  in
             CFLabel(content: .init(title),
                     type: type,
                     color: color,
@@ -122,7 +124,7 @@ public extension CFButton where T == CFLabel {
         }
     }
     
-    init(content: CFLabelData, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, hasPressAnimation: Bool = true, action: @escaping () -> ()) {
+    init(content: CFLabelData, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, hasPressAnimation: Bool = true, hasHapticFeedback: Bool = true, action: @escaping () -> ()) {
         var fontStyle: CFLabelFontStyle
         
         switch size {
@@ -134,7 +136,7 @@ public extension CFButton where T == CFLabel {
             fontStyle = .init(scale: .body)
         }
         
-        self.init(size: size, width: width, hasPressAnimation: hasPressAnimation, displayColor: color.color) { type, color, expandable  in
+        self.init(size: size, width: width, hasPressAnimation: hasPressAnimation, hasHapticFeedback: hasHapticFeedback, displayColor: color.color) { type, color, expandable  in
             CFLabel(content: content,
                     type: type,
                     color: color,
@@ -166,119 +168,4 @@ public extension CFButton where T == CFLabel {
     }
     .padding(.cfFrame(.medium))
     .background(Color.white)
-}
-
-public enum CFButtonType {
-    case blockFill
-    case blockLine
-    case boxFill
-    case boxLine
-    case roundFill
-    case roundLine
-    case text
-    
-    var style: ComponentStyle? {
-        switch self {
-        case .blockFill:
-            return ComponentStyle(cornerStyle: .block(.cfRadius(.xsmall)))
-        case .blockLine:
-            return ComponentStyle(cornerStyle: .block(.cfRadius(.xsmall)), fillStyle: .line)
-        case .boxFill:
-            return ComponentStyle()
-        case .boxLine:
-            return ComponentStyle(fillStyle: .line)
-        case .roundFill:
-            return ComponentStyle(cornerStyle: .round)
-        case .roundLine:
-            return ComponentStyle(cornerStyle: .round, fillStyle: .line)
-        case .text:
-            return ComponentStyle(fillStyle: .text)
-        }
-    }
-    
-    var asLabelType: LabelType {
-        switch self {
-        case .blockFill:
-            return .blockFill(.cfRadius(.xsmall))
-        case .blockLine:
-            return .blockLine(.cfRadius(.xsmall))
-        case .boxFill:
-            return .boxFill
-        case .boxLine:
-            return .boxLine
-        case .roundFill:
-            return .roundFill
-        case .roundLine:
-            return .roundLine
-        case .text:
-            return .text
-        }
-    }
-    
-    var radius: CGFloat {
-        switch self {
-        case .blockFill:
-                .cfRadius(.xsmall)
-        case .blockLine:
-                .cfRadius(.xsmall)
-        case .boxFill:
-                .cfRadius(.square)
-        case .boxLine:
-                .cfRadius(.square)
-        case .roundFill:
-                .cfRadius(.round)
-        case .roundLine:
-                .cfRadius(.round)
-        case .text:
-                .cfRadius(.square)
-        }
-    }
-}
-
-public enum CFButtonSize {
-    case xsamll
-    case small
-    case medium
-    case large
-    case xlarge
-    
-    var height: CGFloat {
-        switch self {
-        case .xsamll:
-            28
-        case .small:
-            32
-        case .medium:
-            36
-        case .large:
-            40
-        case .xlarge:
-            48
-        }
-    }
-}
-
-
-
-struct CFButtonStyle: ButtonStyle, StyleEssential {
-    var type: CFButtonType
-    var size: CFButtonSize
-    var color: Color
-    
-    func makeBody(configuration: Configuration) -> some View {
-        CFButtonContent(configuration: configuration, type: type, size: size, color: color)
-    }
-}
-
-struct CFButtonContent: View, StyleConfiguration {
-    var configuration: ButtonStyleConfiguration
-    
-    var type: CFButtonType
-    var size: CFButtonSize
-    var color: Color
-    
-    var body: some View {
-        configuration.label
-            .frame(maxWidth: .infinity, maxHeight: size.height)
-    }
 }
