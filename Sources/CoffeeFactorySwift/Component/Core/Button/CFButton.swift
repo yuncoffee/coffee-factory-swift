@@ -81,12 +81,14 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
         }
         .onLongPressGesture(minimumDuration: 0.1) {
         } onPressingChanged: { pressing in
-            didLongPress = pressing
-            displayColor = pressing
-            ? pressColor
-            : didHover
-            ? hoverColor
-            : color.color
+            if hasPressAnimation {
+                didLongPress = pressing
+                displayColor = pressing
+                ? pressColor
+                : didHover
+                ? hoverColor
+                : color.color
+            }
         }
     }
 }
