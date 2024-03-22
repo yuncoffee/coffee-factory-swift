@@ -10,7 +10,6 @@ import SwiftUI
 public protocol ButtonComposable {}
 
 extension CFLabel: ButtonComposable {}
-extension EmptyView: ButtonComposable {}
 
 public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable {
     var type: CFButtonType = .blockFill
@@ -81,7 +80,6 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
             : color.color
         }
         .onLongPressGesture(minimumDuration: 0.1) {
-            print("HHHHHHHH")
         } onPressingChanged: { pressing in
             didLongPress = pressing
             displayColor = pressing
@@ -91,21 +89,18 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
             : color.color
         }
     }
-    
-    @available(macOS, unavailable)
-    private func shadowEffect() -> some View {
-        VStack {
-            Text("HELLO")
-        }
-    }
 }
 
 public extension CFButton where T == CFLabel {
-    init(title: String, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, hasPressAnimation: Bool = true, hasHapticFeedback: Bool = true, action: @escaping () -> ()) {
-        
+    init(title: String, 
+         style: CFButtonEssentialStyle = .init(),
+         additionalStyle: CFButtonAdditionalStyle = .init(),
+         configuration: CFButtonConfiguration = .init(),
+         action: @escaping () -> ()) {
+
         var fontStyle: CFLabelFontStyle
         
-        switch size {
+        switch style.size {
         case .xsamll:
             fontStyle = .init(scale: .caption)
         case .xlarge:
@@ -114,7 +109,13 @@ public extension CFButton where T == CFLabel {
             fontStyle = .init(scale: .body)
         }
         
-        self.init(type: type, size: size, width: width, hasPressAnimation: hasPressAnimation, hasHapticFeedback: hasHapticFeedback, displayColor: color.color) { type, color, expandable  in
+        self.init(type: style.type,
+                  size: style.size,
+                  expandable: additionalStyle.expandable,
+                  width: additionalStyle.width,
+                  hasPressAnimation: configuration.hasPressAnimation,
+                  hasHapticFeedback: configuration.hasHapticFeedback,
+                  displayColor: style.color.color) { type, color, expandable  in
             CFLabel(content: .init(title),
                     type: type,
                     color: color,
@@ -126,10 +127,14 @@ public extension CFButton where T == CFLabel {
         }
     }
     
-    init(content: CFLabelData, type: CFButtonType = .blockFill, size: CFButtonSize = .small, color: CFColor = .primaryScale(.primary(.base)), width: CGFloat? = nil, hasPressAnimation: Bool = true, hasHapticFeedback: Bool = true, action: @escaping () -> ()) {
+    init(content: CFLabelData,
+         style: CFButtonEssentialStyle = .init(),
+         additionalStyle: CFButtonAdditionalStyle = .init(),
+         configuration: CFButtonConfiguration = .init(),
+         action: @escaping () -> ()) {
         var fontStyle: CFLabelFontStyle
         
-        switch size {
+        switch style.size {
         case .xsamll:
             fontStyle = .init(scale: .caption)
         case .xlarge:
@@ -138,7 +143,12 @@ public extension CFButton where T == CFLabel {
             fontStyle = .init(scale: .body)
         }
         
-        self.init(type: type, size: size, width: width, hasPressAnimation: hasPressAnimation, hasHapticFeedback: hasHapticFeedback, displayColor: color.color) { type, color, expandable  in
+        self.init(type: style.type,
+                  size: style.size,
+                  width: additionalStyle.width,
+                  hasPressAnimation: configuration.hasPressAnimation,
+                  hasHapticFeedback: configuration.hasHapticFeedback,
+                  displayColor: style.color.color) { type, color, expandable  in
             CFLabel(content: content,
                     type: type,
                     color: color,
@@ -154,17 +164,19 @@ public extension CFButton where T == CFLabel {
 
 #Preview {
     VStack {
-        CFButton(title: "HELLOWORLD", width: 120) {
+        CFButton(title: "HELLOWORLD", additionalStyle: .init(width: 120)) {
             print("HELLO WORLD!")
         }
         .border(.red)
         CFButton(content: .init("Test", icon: "star.fill")) {
             print("HELLO WORLD!")
         }
-        CFButton(title: "Test", type: .roundFill, size: .xlarge) {
+        CFButton(title: "Test", style: .init(type: .roundLine, size: .xlarge)) {
             print("HHHH")
         }
-        CFButton(title: "Test", type: .text, size: .xlarge, hasPressAnimation: false) {
+        CFButton(title: "Test", 
+                 style: .init(type: .text, size: .xlarge),
+                 configuration: .init(hasPressAnimation: false)) {
             print("HHHH")
         }
     }

@@ -8,6 +8,40 @@
 import Foundation
 import SwiftUI
 
+public struct CFButtonEssentialStyle: StyleEssential {
+    var type: CFButtonType
+    var size: CFButtonSize
+    var color: CFColor
+ 
+    public init(type: CFButtonType = .boxFill, 
+                size: CFButtonSize = .small,
+                color: CFColor = .primaryScale(.primary(.base))) {
+        self.type = type
+        self.size = size
+        self.color = color
+    }
+}
+
+public struct CFButtonAdditionalStyle {
+    var expandable: Expandable
+    var width: CGFloat?
+    
+    public init(expandable: Expandable = true, width: CGFloat? = nil) {
+        self.expandable = expandable
+        self.width = width
+    }
+}
+
+public struct CFButtonConfiguration {
+    var hasPressAnimation: Bool
+    var hasHapticFeedback: Bool
+    
+    public init(hasPressAnimation: Bool = true, hasHapticFeedback: Bool = true) {
+        self.hasPressAnimation = hasPressAnimation
+        self.hasHapticFeedback = hasHapticFeedback
+    }
+}
+
 public enum CFButtonType {
     case blockFill
     case blockLine
