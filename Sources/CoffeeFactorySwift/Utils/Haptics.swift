@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS)
 import UIKit
 
 public enum Haptics {
@@ -30,3 +31,4 @@ public enum Haptics {
         }
     }
 }
+#endif

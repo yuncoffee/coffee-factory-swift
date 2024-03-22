@@ -43,7 +43,9 @@ public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable 
 
     public var body: some View {
         Button {
+            #if os(iOS)
             if hasHapticFeedback { Haptics.impact(.light).run() }
+            #endif
             action()
         } label: {
             ZStack {
