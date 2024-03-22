@@ -138,7 +138,7 @@ public extension CFButton where T == CFLabel {
             fontStyle = .init(scale: .body)
         }
         
-        self.init(size: size, width: width, hasPressAnimation: hasPressAnimation, hasHapticFeedback: hasHapticFeedback, displayColor: color.color) { type, color, expandable  in
+        self.init(type: type, size: size, width: width, hasPressAnimation: hasPressAnimation, hasHapticFeedback: hasHapticFeedback, displayColor: color.color) { type, color, expandable  in
             CFLabel(content: content,
                     type: type,
                     color: color,
@@ -161,7 +161,7 @@ public extension CFButton where T == CFLabel {
         CFButton(content: .init("Test", icon: "star.fill")) {
             print("HELLO WORLD!")
         }
-        CFButton(title: "Test", type: .boxLine, size: .xlarge) {
+        CFButton(title: "Test", type: .roundFill, size: .xlarge) {
             print("HHHH")
         }
         CFButton(title: "Test", type: .text, size: .xlarge, hasPressAnimation: false) {
