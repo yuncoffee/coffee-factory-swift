@@ -12,16 +12,16 @@ public protocol ButtonComposable {}
 extension CFLabel: ButtonComposable {}
 
 public struct CFButton<T: View>: StyleEssential, View where T: ButtonComposable {
-    var type: CFButtonType = .blockFill
-    var size: CFButtonSize = .small
-    var color: CFColor = .primaryScale(.primary(.base))
+    var type: CFButtonType
+    var size: CFButtonSize
+    var color: CFColor
     
-    var expandable: Expandable = true
+    var expandable: Expandable
     
     var width: CGFloat?
     
-    var hasPressAnimation = true
-    var hasHapticFeedback = true
+    var hasPressAnimation: Bool
+    var hasHapticFeedback: Bool
     
     @State private var displayColor: Color
     @State private var didLongPress = false
@@ -111,6 +111,7 @@ public extension CFButton where T == CFLabel {
         
         self.init(type: style.type,
                   size: style.size,
+                  color: style.color,
                   expandable: additionalStyle.expandable,
                   width: additionalStyle.width,
                   hasPressAnimation: configuration.hasPressAnimation,
@@ -145,6 +146,8 @@ public extension CFButton where T == CFLabel {
         
         self.init(type: style.type,
                   size: style.size,
+                  color: style.color,
+                  expandable: additionalStyle.expandable,
                   width: additionalStyle.width,
                   hasPressAnimation: configuration.hasPressAnimation,
                   hasHapticFeedback: configuration.hasHapticFeedback,
