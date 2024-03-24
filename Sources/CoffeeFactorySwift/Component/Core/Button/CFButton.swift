@@ -100,17 +100,6 @@ public extension CFButton where T == CFLabel {
          configuration: CFButtonConfiguration = .init(),
          action: @escaping () -> ()) {
 
-        var fontStyle: CFLabelFontStyle
-        
-        switch style.size {
-        case .xsamll:
-            fontStyle = .init(scale: .caption)
-        case .xlarge:
-            fontStyle = .init(scale: .headline)
-        default:
-            fontStyle = .init(scale: .body)
-        }
-        
         self.init(type: style.type,
                   size: style.size,
                   color: style.color,
@@ -123,7 +112,7 @@ public extension CFButton where T == CFLabel {
                     type: type,
                     color: color,
                     expandable: expandable,
-                    fontStyle: fontStyle,
+                    fontStyle: style.getLabelFontStyle(),
                     padding: .init(v: 0, h: 6))
         } action: {
             action()
@@ -135,17 +124,7 @@ public extension CFButton where T == CFLabel {
          additionalStyle: CFButtonAdditionalStyle = .init(),
          configuration: CFButtonConfiguration = .init(),
          action: @escaping () -> ()) {
-        var fontStyle: CFLabelFontStyle
-        
-        switch style.size {
-        case .xsamll:
-            fontStyle = .init(scale: .caption)
-        case .xlarge:
-            fontStyle = .init(scale: .headline)
-        default:
-            fontStyle = .init(scale: .body)
-        }
-        
+
         self.init(type: style.type,
                   size: style.size,
                   color: style.color,
@@ -158,13 +137,12 @@ public extension CFButton where T == CFLabel {
                     type: type,
                     color: color,
                     expandable: expandable,
-                    fontStyle: fontStyle,
+                    fontStyle: style.getLabelFontStyle(),
                     padding: .init(v: 0, h: 6))
         } action: {
             action()
         }
     }
-    
 }
 
 #Preview {
@@ -174,12 +152,12 @@ public extension CFButton where T == CFLabel {
         }
         .border(.red)
         CFButton(content: .init("Test", icon: "star.fill")) {
-            print("HELLO WORLD!")
+            print("TTTT")
         }
         CFButton(title: "Test", style: .init(type: .roundLine, size: .xlarge)) {
             print("HHHH")
         }
-        CFButton(title: "Test", 
+        CFButton(title: "Test",
                  style: .init(type: .text, size: .xlarge),
                  configuration: .init(hasPressAnimation: false)) {
             print("HHHH")

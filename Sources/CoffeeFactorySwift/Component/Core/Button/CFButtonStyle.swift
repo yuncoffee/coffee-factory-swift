@@ -20,6 +20,19 @@ public struct CFButtonEssentialStyle: StyleEssential {
         self.size = size
         self.color = color
     }
+    
+    func getLabelFontStyle() -> CFLabelFontStyle {
+        var result: CFLabelFontStyle = .init(scale: .body)
+        switch size {
+        case .xsamll:
+            result = .init(scale: .caption)
+        case .xlarge:
+            result = .init(scale: .headline)
+        default:
+            break
+        }
+        return result
+    }
 }
 
 public struct CFButtonAdditionalStyle {
